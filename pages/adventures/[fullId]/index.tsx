@@ -2,7 +2,7 @@ import { getAdventureById } from '~/services/adventureService';
 import { extractIdAndSlug } from '~/utils/url';
 import Container from '~/components/container';
 import type { Adventure, Comment, Sport } from '~/config/types';
-import AdventurePage from './_components/adventurePage';
+import AdventurePage from '~/components/adventures/adventurePage';
 import CommentForm from '~/components/comments/commentForm';
 import CommentBox from '~/components/comments/commentBox';
 import uniqBy from 'lodash/uniqBy.js';

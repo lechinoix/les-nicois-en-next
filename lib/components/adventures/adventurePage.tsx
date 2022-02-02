@@ -7,7 +7,7 @@ import { formatFrenchDate } from '~/utils/date';
 import { truncateText } from '~/utils/string';
 import uniqBy from 'lodash/uniqBy.js';
 import { getCoverPicture } from '~/services/adventureService';
-import { Topo } from '../../../../lib/config/types';
+import { Topo } from '../../config/types';
 import Head from 'next/head';
 
 type PropsType = {
