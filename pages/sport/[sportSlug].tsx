@@ -4,33 +4,27 @@ import AdventureCover from '~/components/adventures/adventureCover';
 import { AdventureStatus, CoverTypes } from '~/config/constants';
 import LargeCover from '~/components/coverPicture/largeCover';
 import ResponsiveGrid from '~/components/ui/responsiveGrid';
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 import { useMemo } from 'react';
+import { GetStaticPropsContext } from 'next';
+import Head from 'next/head';
 
-type LoaderDataType = {
+type PropsType = {
 	sport: Sport
 }
 
-export const loader: LoaderFunction = async ({ params }): Promise<LoaderDataType> => {
-	if (!params.sportSlug) throw new Error('You need to specify a sportSlug');
+export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
+	if (!params?.sportSlug) throw new Error('You need to specify a sportSlug');
+	if (Array.isArray(params.sportSlug)) throw new Error('Only one sport slug can be used');
 
 	const sport = await getSportBySlug(params.sportSlug);
-	return { sport }
+	return { props: { sport } }
 }
 
-
-export const meta: MetaFunction = ({ data: { sport } }) => ({
-	"og:image": sport.cover_picture.picture.formats.medium.url,
-	"og:title": sport.name,
-	"og:description": `Toutes les sorties de ${sport.name}`
-})
-
-export default () => {
-	const { sport } = useLoaderData<LoaderDataType>();
+const SportPage = ({ sport }: PropsType) => {
 	const sportTiles = useMemo(() => sport.adventures
-		.filter((adventure) => adventure.status === AdventureStatus.DONE)
+		.filter((adventure: Adventure) => adventure.status === AdventureStatus.DONE)
 		.sort((a: Adventure, b: Adventure) => new Date(b.date).getTime() - new Date(a.date).getTime())
-		.map((adventure) => ({
+		.map((adventure: Adventure) => ({
 			component: AdventureCover,
 			props: { adventure, coverType: CoverTypes.SMALL },
 			key: `${adventure.id}`
@@ -38,6 +32,11 @@ export default () => {
 
 	return (
 		<>
+			<Head>
+				<meta name="og:image" content={sport.cover_picture.picture.formats.medium.url} />
+				<meta name="og:title" content={sport.name} />
+				<meta name="og:description" content={`Toutes les sorties de ${sport.name}`} />
+			</Head>
 			{sport?.cover_picture &&
 				<LargeCover
 					picture={sport.cover_picture.picture}
@@ -52,3 +51,4 @@ export default () => {
 	)
 }
 
+export default SportPage

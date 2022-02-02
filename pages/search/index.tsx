@@ -1,23 +1,22 @@
 import { getAllAdventures } from '~/services/adventureService';
-import { LoaderFunction, useLoaderData } from 'remix';
 import AdventureCard from '~/components/adventures/adventureCard';
 import type { Adventure } from '~/config/types';
+import { GetStaticPropsContext } from 'next/types';
 
-type LoaderDataType = {
+type PropsType = {
 	adventures: Adventure[]
 }
 
-export const loader: LoaderFunction = async (): Promise<LoaderDataType> => {
+export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
 	const adventures = await getAllAdventures();
-	return { adventures };
+	return { props: { adventures } };
 }
 
-export default () => {
-	const { adventures } = useLoaderData<LoaderDataType>();
+const SearchPage = ({ adventures }: PropsType) => {
 	return (
 		<main className="h-screen pt-20 grid grid-cols-2">
 			<section className="h-full overflow-hidden pl-3">
-				{adventures.map(adventure => <AdventureCard adventure={adventure} />)}
+				{adventures.map(adventure => <AdventureCard key={adventure.id} adventure={adventure} />)}
 			</section>
 			<section>
 				<img src="/img/fake-map.png" />
@@ -25,3 +24,5 @@ export default () => {
 		</main>
 	)
 }
+
+export default SearchPage

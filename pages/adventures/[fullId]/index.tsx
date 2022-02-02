@@ -1,32 +1,29 @@
-import { LoaderFunction, useLoaderData } from 'remix';
 import { getAdventureById } from '~/services/adventureService';
 import { extractIdAndSlug } from '~/utils/url';
 import Container from '~/components/container';
 import type { Adventure, Comment } from '~/config/types';
-import AdventurePage, { links as adventurePageLinks } from './_components/adventurePage';
+import AdventurePage from './_components/adventurePage';
 import CommentForm from '~/components/comments/commentForm';
 import CommentBox from '~/components/comments/commentBox';
 import uniqBy from 'lodash/uniqBy.js';
 import { useEffect, useState } from 'react';
+import { GetStaticPropsContext } from 'next/types';
 
-type LoaderDataType = {
+type PropsType = {
 	adventure: Adventure;
 }
 
-export const links = adventurePageLinks;
-
-export const loader: LoaderFunction = async ({ params }): Promise<LoaderDataType> => {
-	if (!params.fullId) throw new Error('Could not find fullId url param')
+export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
+	if (!params?.fullId) throw new Error('Could not find fullId url param')
+	if (Array.isArray(params.fullId)) throw new Error('Multiple fullid not allowed')
 
 	const { id } = extractIdAndSlug(params.fullId)
 	const adventure = await getAdventureById(id);
-	return { adventure }
+	return { props: { adventure } }
 }
 
 
-export default () => {
-	const { adventure } = useLoaderData<LoaderDataType>()
-
+const AdventureFullPage = ({ adventure }: PropsType) => {
 	const [comments, setComments] = useState<Comment[]>([]);
 	const [isCreatingComment, setIsCreatingComment] = useState<boolean>(false);
 
@@ -54,7 +51,7 @@ export default () => {
 					{comments.length > 0 &&
 						<>
 							{comments.map(comment => (
-								<div className="my-5">
+								<div className="my-5" key={comment.id}>
 									<CommentBox comment={comment} adventureId={adventure.id} />
 								</div>
 							))}
@@ -73,3 +70,5 @@ export default () => {
 		</>
 	)
 }
+
+export default AdventureFullPage

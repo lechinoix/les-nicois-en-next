@@ -1,5 +1,5 @@
 import type { Adventure } from '~/config/types';
-import Slider, { links as sliderLinks } from '~/components/slider';
+import Slider from '~/components/slider';
 import TopoLink from '~/components/topoLink';
 import AdventureCard from '~/components/adventures/adventureHeader';
 import Container from '~/components/container';
@@ -7,23 +7,14 @@ import { formatFrenchDate } from '~/utils/date';
 import { truncateText } from '~/utils/string';
 import uniqBy from 'lodash/uniqBy.js';
 import { getCoverPicture } from '~/services/adventureService';
-import { MetaFunction } from 'remix';
+import { Topo } from '../../../../lib/config/types';
+import Head from 'next/head';
 
 type PropsType = {
 	adventure: Adventure
 }
 
-export const links = sliderLinks;
-
-export const meta: MetaFunction = ({ data: { adventure } }) => {
-	return {
-		"og:image": getCoverPicture(adventure)?.formats.medium.url || '',
-		"og:title": adventure.title,
-		"og:description": adventure.short_description || truncateText(adventure.description)
-	}
-}
-
-export default ({ adventure }: PropsType) => {
+const AdventurePage = ({ adventure }: PropsType) => {
 	// sliderRef.subscribe((galleryInstance: LightGallery | null) => {
 	// 	if (!galleryInstance) return;
 	// 	gallery = galleryInstance;
@@ -48,6 +39,11 @@ export default ({ adventure }: PropsType) => {
 
 	return (
 		<>
+			<Head>
+				<meta name="og:image" content={getCoverPicture(adventure)?.formats.medium.url || ''} />
+				<meta name="og:title" content={adventure.title} />
+				<meta name="og:description" content={adventure.short_description || truncateText(adventure.description)} />
+			</Head>
 			{/* <AdventureCard adventure={adventure} onClick={openSlider} /> */}
 			<AdventureCard adventure={adventure} />
 			<Container>
@@ -66,7 +62,7 @@ export default ({ adventure }: PropsType) => {
 				{adventure.topo?.length > 0 &&
 					<>
 						<b>Topo</b> :
-						{adventure.topo.map(topo => (
+						{adventure.topo.map((topo: Topo) => (
 							<div key={topo.id}>
 								<TopoLink topo={topo} />
 								<br />
@@ -83,3 +79,5 @@ export default ({ adventure }: PropsType) => {
 		</>
 	)
 }
+
+export default AdventurePage

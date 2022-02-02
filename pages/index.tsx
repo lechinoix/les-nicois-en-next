@@ -16,31 +16,23 @@ import env from '~/config/env';
 import { getLatestAdventures } from '~/services/adventureService';
 import { getAllSports } from '~/services/sportService';
 import { fetchPictureById } from '~/services/uploadPluginService';
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
+import Head from 'next/head'
 
-export const loader: LoaderFunction = async (): Promise<LoaderDataType> => {
+export const getStaticProps = async (): Promise<{ props: PropsType }> => {
 	const latestAdventures = await getLatestAdventures();
 	const coverPicture = await fetchPictureById(fetch, env.COVER_PICTURE_ID);
 	const sports = await getAllSports();
 
-	return { latestAdventures, coverPicture, sports }
+	return { props: { latestAdventures, coverPicture, sports } }
 };
 
-type LoaderDataType = {
+type PropsType = {
 	latestAdventures: Adventure[];
 	coverPicture: Picture;
 	sports: Sport[];
 }
 
-export const meta: MetaFunction = ({ data }) => ({
-	"og:image": data.coverPicture.formats.medium.url,
-	"og:title": DEFAULT_TITLE,
-	"og:description": DEFAULT_DESCRIPTION,
-})
-
-export default () => {
-	const { latestAdventures, coverPicture, sports } = useLoaderData<LoaderDataType>()
-
+const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	const adventureItems = latestAdventures.map((adventure) => ({
 		component: AdventureCover,
 		props: { adventure, coverType: CoverTypes.SMALL },
@@ -60,6 +52,11 @@ export default () => {
 
 	return (
 		<>
+			<Head>
+				<meta name="og:image" content={coverPicture.formats.medium.url} />
+				<meta name="og:title" content={DEFAULT_TITLE} />
+				<meta name="og:description" content={DEFAULT_DESCRIPTION} />
+			</Head>
 			<HomeCover picture={coverPicture} position={PicturePosition.TOP_LEFT} />
 			<div className="p-10 flex flex-col w-full justify-center items-center">
 				<div className="flex justify-center flex-col md:flex-row mx-5">
@@ -68,7 +65,7 @@ export default () => {
 						<br />
 						<p className="text-xl text-justify font-sans font-thin">
 							Nous sommes un couple de jeunes aventuriers à la recherche de sensations fortes en montagne
-							! Basés sur Grenoble, on pratique l'alpinisme, l'escalade et le ski.
+							! Basés sur Grenoble, on pratique l&apos;alpinisme, l&apos;escalade et le ski.
 							<br />
 							Notre objectif : raconter nos aventures, donner envie de s’installer dans cette belle région
 							et de se lancer dans l’aventure outdoor quel quelle soit ..
@@ -93,3 +90,5 @@ export default () => {
 		</>
 	)
 }
+
+export default HomePage;
