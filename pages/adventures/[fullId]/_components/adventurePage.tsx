@@ -1,5 +1,5 @@
 import type { Adventure } from '~/config/types';
-import Slider from '~/components/slider';
+import Slider from '~/components/slider/Slider';
 import TopoLink from '~/components/topoLink';
 import AdventureCard from '~/components/adventures/adventureHeader';
 import Container from '~/components/container';

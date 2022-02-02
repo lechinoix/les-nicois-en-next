@@ -1,10 +1,7 @@
 import { formatAssetUrl } from '~/services/adventureService';
 import type { Picture } from '~/config/types';
 import isMobile from '~/utils/isMobile';
-import lgStyle from 'lightgallery/css/lightgallery.css';
-import lgZoom from 'lightgallery/css/lg-zoom.css';
-import lgThumbnail from 'lightgallery/css/lg-thumbnail.css';
-import lgFont from './sliderFont.css';
+import './Slider.module.css';
 import { useEffect, useRef } from 'react';
 
 type PropsType = {
@@ -12,14 +9,7 @@ type PropsType = {
 	galleryName?: string
 }
 
-export const links = () => [
-  { rel: "stylesheet", href: lgStyle },
-  { rel: "stylesheet", href: lgZoom },
-  { rel: "stylesheet", href: lgThumbnail },
-  { rel: "stylesheet", href: lgFont },
-];
-
-export default ({ pictures = [] }: PropsType) => {
+const Slider = ({ pictures = [] }: PropsType) => {
 	const sliderRef = useRef(null);
 	useEffect(() => {
 		const setupGallery = async () => {
@@ -68,3 +58,5 @@ export default ({ pictures = [] }: PropsType) => {
 		</div>
 	)
 }
+
+export default Slider

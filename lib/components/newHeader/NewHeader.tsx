@@ -3,15 +3,11 @@ import { ROUTES } from '~/config/routes';
 import BurgerIcon from './burgerIcon';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from './styles.css';
+import './NewHeader.module.css';
 
 type PropsType = { sports: Sport[] };
 
-export const links = () => [
-  { rel: "stylesheet", href: styles }
-];
-
-export default ({ sports }: PropsType) => {
+const NewHeader = ({ sports }: PropsType) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -60,3 +56,5 @@ export default ({ sports }: PropsType) => {
 		</nav>
 	)
 }
+
+export default NewHeader

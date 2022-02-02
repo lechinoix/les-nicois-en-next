@@ -7,7 +7,9 @@ specifiers:
   autoprefixer: ^10.4.2
   eslint: 8.8.0
   eslint-config-next: 12.0.10
+  lightgallery: ^2.3.0
   lodash: ^4.17.21
+  marked: ^4.0.12
   next: 12.0.10
   postcss: ^8.4.6
   react: 17.0.2
@@ -16,7 +18,9 @@ specifiers:
   typescript: 4.5.5
 
 dependencies:
+  lightgallery: 2.3.0
   lodash: 4.17.21
+  marked: 4.0.12
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -1406,6 +1410,11 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /lightgallery/2.3.0:
+    resolution: {integrity: sha512-kdu+uQM2X4LUN2G2tTp72ZOLfwmGwZFjiVQBqYY2E2zL1ADibKwnxZUBEw2zI5zefDe/71IHg+6kBRTbr8CGyg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /lilconfig/2.0.4:
     resolution: {integrity: sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==}
     engines: {node: '>=10'}
@@ -1443,6 +1452,12 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /marked/4.0.12:
+    resolution: {integrity: sha512-hgibXWrEDNBWgGiK18j/4lkS6ihTe9sxtV4Q1OQppb/0zzyPSzoFANBa5MfsG/zgsWklmNnhm0XACZOH/0HBiQ==}
+    engines: {node: '>= 12'}
+    hasBin: true
+    dev: false
 
   /merge2/1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
