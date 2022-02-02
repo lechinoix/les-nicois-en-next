@@ -5,6 +5,7 @@ import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 type PropsType = {
 	pictures: Picture[],
@@ -50,7 +51,7 @@ const Slider = ({ pictures = [] }: PropsType) => {
 					data-lg-size={`${picture.width}-${picture.height}`}
 					data-src={formatAssetUrl(picture.url)}
 				>
-					<img
+					<Image
 						alt={picture.alternativeText}
 						src={formatAssetUrl(picture.formats.small.url)}
 						className="h-full object-contain"
