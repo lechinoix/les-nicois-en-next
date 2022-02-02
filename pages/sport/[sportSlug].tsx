@@ -5,7 +5,7 @@ import { AdventureStatus, CoverTypes } from '~/config/constants';
 import LargeCover from '~/components/coverPicture/largeCover';
 import ResponsiveGrid from '~/components/ui/responsiveGrid';
 import { useMemo } from 'react';
-import { GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import SimpleLayout from '~/components/layouts/SimpleLayout';
 
@@ -14,7 +14,7 @@ type PropsType = {
 	allSports: Sport[]
 }
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
+export const getServerSideProps = async ({ params }: GetServerSidePropsContext): Promise<{ props: PropsType }> => {
 	if (!params?.sportSlug) throw new Error('You need to specify a sportSlug');
 	if (Array.isArray(params.sportSlug)) throw new Error('Only one sport slug can be used');
 

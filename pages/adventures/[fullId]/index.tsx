@@ -7,7 +7,7 @@ import CommentForm from '~/components/comments/commentForm';
 import CommentBox from '~/components/comments/commentBox';
 import uniqBy from 'lodash/uniqBy.js';
 import { useEffect, useState } from 'react';
-import { GetStaticPropsContext } from 'next/types';
+import { GetServerSidePropsContext } from 'next/types';
 import SimpleLayout from '~/components/layouts/SimpleLayout';
 import { getAllSports } from '~/services/sportService';
 
@@ -16,7 +16,7 @@ type PropsType = {
 	allSports: Sport[];
 }
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
+export const getServerSideProps = async ({ params }: GetServerSidePropsContext): Promise<{ props: PropsType }> => {
 	if (!params?.fullId) throw new Error('Could not find fullId url param')
 	if (Array.isArray(params.fullId)) throw new Error('Multiple fullid not allowed')
 
