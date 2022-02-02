@@ -1,10 +1,12 @@
 import { getPreviewById } from '~/services/adventureService';
-import type { Adventure } from '~/config/types';
+import type { Adventure, Sport } from '~/config/types';
 import AdventurePage from './_components/adventurePage';
 import { extractIdAndSlug } from '~/utils/url';
 import { GetServerSidePropsContext } from 'next/types';
+import SimpleLayout from '~/components/layouts/SimpleLayout';
+import { getAllSports } from '~/services/sportService';
 
-type PropsType = { adventure: Adventure }
+type PropsType = { adventure: Adventure, allSports: Sport[] }
 
 export const getInitalProps = async ({ params, query }: GetServerSidePropsContext): Promise<{ props: PropsType }> => {
 	if (!params?.fullId) throw new Error('Could not find fullId url param')
@@ -14,8 +16,15 @@ export const getInitalProps = async ({ params, query }: GetServerSidePropsContex
 
 	const { id } = extractIdAndSlug(params.fullId)
 	const adventure = await getPreviewById(id, query.token);
-	return { props: { adventure } }
+	const allSports = await getAllSports()
+	return { props: { adventure, allSports } }
 }
 
-export default AdventurePage
+const PreviewPage = ({ adventure, allSports }: PropsType) => (
+	<SimpleLayout sports={allSports}>
+		<AdventurePage adventure={adventure} />
+	</SimpleLayout>
+)
+
+export default PreviewPage
 

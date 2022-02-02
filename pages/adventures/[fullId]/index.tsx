@@ -1,16 +1,19 @@
 import { getAdventureById } from '~/services/adventureService';
 import { extractIdAndSlug } from '~/utils/url';
 import Container from '~/components/container';
-import type { Adventure, Comment } from '~/config/types';
+import type { Adventure, Comment, Sport } from '~/config/types';
 import AdventurePage from './_components/adventurePage';
 import CommentForm from '~/components/comments/commentForm';
 import CommentBox from '~/components/comments/commentBox';
 import uniqBy from 'lodash/uniqBy.js';
 import { useEffect, useState } from 'react';
 import { GetStaticPropsContext } from 'next/types';
+import SimpleLayout from '~/components/layouts/SimpleLayout';
+import { getAllSports } from '~/services/sportService';
 
 type PropsType = {
 	adventure: Adventure;
+	allSports: Sport[];
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
@@ -19,11 +22,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise
 
 	const { id } = extractIdAndSlug(params.fullId)
 	const adventure = await getAdventureById(id);
-	return { props: { adventure } }
+	const allSports = await getAllSports();
+	return { props: { adventure, allSports } }
 }
 
 
-const AdventureFullPage = ({ adventure }: PropsType) => {
+const AdventureFullPage = ({ adventure, allSports }: PropsType) => {
 	const [comments, setComments] = useState<Comment[]>([]);
 	const [isCreatingComment, setIsCreatingComment] = useState<boolean>(false);
 
@@ -43,7 +47,7 @@ const AdventureFullPage = ({ adventure }: PropsType) => {
 	};
 
 		return (
-		<>
+		<SimpleLayout sports={allSports}>
 			<AdventurePage adventure={adventure} />
 			<Container>
 				<div className="w-full mt-10">
@@ -67,7 +71,7 @@ const AdventureFullPage = ({ adventure }: PropsType) => {
 					}
 				</div>
 			</Container>
-		</>
+		</SimpleLayout>
 	)
 }
 

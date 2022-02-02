@@ -1,27 +1,32 @@
 import { getAllAdventures } from '~/services/adventureService';
 import AdventureCard from '~/components/adventures/adventureCard';
-import type { Adventure } from '~/config/types';
-import { GetStaticPropsContext } from 'next/types';
+import type { Adventure, Sport } from '~/config/types';
+import { getAllSports } from '~/services/sportService';
+import SimpleLayout from '~/components/layouts/SimpleLayout';
 
 type PropsType = {
-	adventures: Adventure[]
+	adventures: Adventure[],
+	allSports: Sport[]
 }
 
-export const getStaticProps = async ({ params }: GetStaticPropsContext): Promise<{ props: PropsType }> => {
+export const getStaticProps = async (): Promise<{ props: PropsType }> => {
 	const adventures = await getAllAdventures();
-	return { props: { adventures } };
+	const allSports = await getAllSports();
+	return { props: { adventures, allSports } };
 }
 
-const SearchPage = ({ adventures }: PropsType) => {
+const SearchPage = ({ adventures, allSports }: PropsType) => {
 	return (
-		<main className="h-screen pt-20 grid grid-cols-2">
-			<section className="h-full overflow-hidden pl-3">
-				{adventures.map(adventure => <AdventureCard key={adventure.id} adventure={adventure} />)}
-			</section>
-			<section>
-				<img src="/img/fake-map.png" />
-			</section>
-		</main>
+		<SimpleLayout sports={allSports}>
+			<main className="h-screen pt-20 grid grid-cols-2">
+				<section className="h-full overflow-hidden pl-3">
+					{adventures.map(adventure => <AdventureCard key={adventure.id} adventure={adventure} />)}
+				</section>
+				<section>
+					<img src="/img/fake-map.png" />
+				</section>
+			</main>
+		</SimpleLayout>
 	)
 }
 

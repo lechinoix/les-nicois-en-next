@@ -17,6 +17,7 @@ import { getLatestAdventures } from '~/services/adventureService';
 import { getAllSports } from '~/services/sportService';
 import { fetchPictureById } from '~/services/uploadPluginService';
 import Head from 'next/head'
+import SimpleLayout from '~/components/layouts/SimpleLayout';
 
 export const getStaticProps = async (): Promise<{ props: PropsType }> => {
 	const latestAdventures = await getLatestAdventures();
@@ -51,7 +52,7 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	}));
 
 	return (
-		<>
+		<SimpleLayout sports={sports}>
 			<Head>
 				<meta name="og:image" content={coverPicture.formats.medium.url} />
 				<meta name="og:title" content={DEFAULT_TITLE} />
@@ -87,7 +88,7 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 					<ResponsiveGrid items={sportItems} />
 				</div>
 			</div>
-		</>
+		</SimpleLayout>
 	)
 }
 
