@@ -1,7 +1,9 @@
 import { formatAssetUrl } from '~/services/adventureService';
 import type { Picture } from '~/config/types';
 import isMobile from '~/utils/isMobile';
-import './Slider.module.css';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
 import { useEffect, useRef } from 'react';
 
 type PropsType = {
