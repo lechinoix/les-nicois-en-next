@@ -1,6 +1,7 @@
 import type { PicturePosition } from '~/config/constants';
 import { getCoverPositionStyle } from '~/services/coverPictureService';
 import type { Picture } from '~/config/types';
+import Image from 'next/image';
 
 type PropsType = {
 	picture: Picture | null;
@@ -13,7 +14,7 @@ type PropsType = {
 const chooseFormatUrlFromPicture = (picture: Picture) =>
 	picture.formats.medium ? picture.formats.medium.url : picture.url;
 
-export default ({ picture,	position = null,	href = '#',	title = '',	onClick }: PropsType) => (
+const SmallCover = ({ picture,	position = null,	href = '#',	title = '',	onClick }: PropsType) => (
 	<a
 		href={href}
 		onClick={onClick || (() => null)}
@@ -35,7 +36,7 @@ export default ({ picture,	position = null,	href = '#',	title = '',	onClick }: P
 			</strong>
 		</div>
 		{picture &&
-			<img
+			<Image
 				className={`object-cover ${getCoverPositionStyle(position)} h-full w-full`}
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
@@ -43,3 +44,5 @@ export default ({ picture,	position = null,	href = '#',	title = '',	onClick }: P
 		}
 	</a>
 )
+
+export default SmallCover

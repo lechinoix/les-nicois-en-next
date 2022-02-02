@@ -18,6 +18,7 @@ import { getAllSports } from '~/services/sportService';
 import { fetchPictureById } from '~/services/uploadPluginService';
 import Head from 'next/head'
 import SimpleLayout from '~/components/layouts/SimpleLayout';
+import Image from 'next/image';
 
 export const getStaticProps = async (): Promise<{ props: PropsType }> => {
 	const latestAdventures = await getLatestAdventures();
@@ -72,7 +73,7 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 							et de se lancer dans l’aventure outdoor quel quelle soit ..
 						</p>
 					</div>
-					<img
+					<Image
 						src={HOMEPAGE_US_IMAGE_URL}
 						className="w-full md:w-96"
 						alt="Nous deux en haut du mont Coolidge, la Barre des Écrins est juste derrière !"

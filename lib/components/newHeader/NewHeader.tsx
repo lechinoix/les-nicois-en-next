@@ -4,6 +4,7 @@ import BurgerIcon from './burgerIcon';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import './NewHeader.module.css';
+import Image from 'next/image';
 
 type PropsType = { sports: Sport[] };
 
@@ -30,9 +31,9 @@ const NewHeader = ({ sports }: PropsType) => {
 
 	return (
 		<nav className="absolute bg-linear-b-w py-5 z-10 mx-auto w-full px-5" style={{background: 'linear-gradient(rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))'}}>
-			<div className="flex items-start justify-between items-center">
+			<div className="flex justify-between items-center">
 				<a href={ROUTES.HOME} className="flex items-center">
-					<img src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" className="w-14" />
+					<Image src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" className="w-14" />
 					<span className="text-2xl text-white font-extralight ml-4"> Les Niçois en Vadrouille </span>
 				</a>
 				<BurgerIcon isOpen={isOpen} onClick={toggleMenu} ratio={3} ref={buttonRef} />
@@ -43,7 +44,7 @@ const NewHeader = ({ sports }: PropsType) => {
 						{sports.map(sport => (
 							<a
 								href={`/sport/${sport.slug}`}
-								className="flex text-white block px-4 py-2 text-sm justify-start items-center uppercase"
+								className="flex text-white px-4 py-2 text-sm justify-start items-center uppercase"
 								role="menuitem"
 								key={sport.id}
 							>

@@ -8,7 +8,7 @@ type PropsType = {
 	adventureId: number;
 }
 
-export default ({ comment, adventureId }: PropsType) => {
+const CommentBox = ({ comment, adventureId }: PropsType) => {
 	const [initials, setInitials] = useState<string>()
 	useEffect(() => {
 		setInitials(comment.authorName
@@ -54,10 +54,11 @@ export default ({ comment, adventureId }: PropsType) => {
 					<p className="text-xs text-green-600">Votre demande a été prise en compte</p>
 				}
 				{reportFailed &&
-					<p className="text-xs text-red-600">Votre demande n'a pas pu être prise en compte</p>
+					<p className="text-xs text-red-600">Votre demande n&apos;a pas pu être prise en compte</p>
 				}
 			</div>
 		</>
 	)
 }
 
+export default CommentBox

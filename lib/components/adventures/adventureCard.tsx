@@ -1,10 +1,11 @@
 import { getCoverPicture } from '~/services/adventureService';
 import type { Adventure, Picture } from '~/config/types';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type PropsType = { adventure: Adventure }
 
-export default ({ adventure }: PropsType) => {
+const AdventureCard = ({ adventure }: PropsType) => {
 	const [coverPicture, setCoverPicture] = useState<Picture | null>()
 
 	useEffect(() => {
@@ -15,7 +16,7 @@ export default ({ adventure }: PropsType) => {
 		<div className="flex my-5">
 			<div className="w-40 h-24 overflow-hidden rounded-xl flex-shrink-0">
 				{coverPicture &&
-					<img
+					<Image
 						className="object-cover w-full"
 						src={coverPicture.formats.thumbnail.url}
 						alt={coverPicture.alternativeText}
@@ -37,3 +38,5 @@ export default ({ adventure }: PropsType) => {
 		</div>
 	)
 }
+
+export default AdventureCard

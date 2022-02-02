@@ -1,5 +1,5 @@
 // From https://stackoverflow.com/a/11381730/10261061
-export default (): boolean => {
+const isMobile = (): boolean => {
 	let check = false;
 	(function (a) {
 		if (
@@ -11,6 +11,8 @@ export default (): boolean => {
 			)
 		)
 			check = true;
-	})(navigator.userAgent || navigator.vendor || window.opera);
+	})(navigator.userAgent || navigator.vendor);
 	return check;
 };
+
+export default isMobile

@@ -19,7 +19,7 @@ type PropsType = {
 	onClick?: (() => void) | null;
 }
 
-export default ({ adventure, coverType = CoverTypes.LARGE, onClick = null }: PropsType) => {
+const AdventureCover = ({ adventure, coverType = CoverTypes.LARGE, onClick = null }: PropsType) => {
 	const position = adventure.cover_picture?.position;
 	const picture = getCoverPicture(adventure);
 	const title = adventure.title;
@@ -34,6 +34,4 @@ export default ({ adventure, coverType = CoverTypes.LARGE, onClick = null }: Pro
 	)
 }
 
-
-
-
+export default AdventureCover

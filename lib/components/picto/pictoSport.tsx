@@ -21,7 +21,7 @@ type PropsType = {
 	fill: string;
 }
 
-export default ({ sportSlug, fill = '' }: PropsType) => {
+const PictoSport = ({ sportSlug, fill = '' }: PropsType) => {
 	const Picto = sportToPicto.hasOwnProperty(sportSlug) ? sportToPicto[sportSlug] : DEFAULT_ICON;
 
 	return (
@@ -29,3 +29,4 @@ export default ({ sportSlug, fill = '' }: PropsType) => {
 	)
 }
 
+export default PictoSport

@@ -1,4 +1,4 @@
-export default ({ fill = 'gray' }: { fill: string }) => (
+const SkiBoot = ({ fill = 'gray' }: { fill: string }) => (
 	<svg
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
@@ -11,3 +11,5 @@ export default ({ fill = 'gray' }: { fill: string }) => (
 		></svg
 	>
 )
+
+export default SkiBoot

@@ -9,7 +9,7 @@ type PropsType = {
 	onSuccess: (comment: Comment) => void;
 }
 
-export default ({ adventureId, onSuccess }: PropsType) => {
+const CommentForm = ({ adventureId, onSuccess }: PropsType) => {
 	// const name = field('name', '', [required()]);
 	// const emailInput = field('emailInput', '', [email(), required()]);
 	// const content = field('content', '', [required()]);
@@ -63,3 +63,5 @@ export default ({ adventureId, onSuccess }: PropsType) => {
 		</section>
 	)
 }
+
+export default CommentForm

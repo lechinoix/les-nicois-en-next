@@ -15,7 +15,7 @@ import { PropsWithChildren } from 'react';
 		onClick?: (() => void);
 	}>
 
-export default ({ adventure, onClick = () => null, children }: PropsType) => (
+const AdventureHeader = ({ adventure, onClick = () => null, children }: PropsType) => (
 	<div>
 		<AdventureCover adventure={adventure} onClick={onClick} coverType={CoverTypes.LARGE} />
 		<Container>
@@ -52,3 +52,5 @@ export default ({ adventure, onClick = () => null, children }: PropsType) => (
 		</Container>
 	</div>
 )
+
+export default AdventureHeader

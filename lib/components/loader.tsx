@@ -1,7 +1,9 @@
 import Mountain from '~/components/icons/loaders/mountain';
 
-export default () => (
+const Loader = () => (
 	<div className="w-52">
 		<Mountain />
 	</div>
 )
+
+export default Loader;

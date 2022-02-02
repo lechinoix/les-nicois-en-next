@@ -1,4 +1,4 @@
-export default ({ fill = 'gray' }: { fill: string }) => (
+const SandClock = ({ fill = 'gray' }: { fill: string }) => (
 	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{fill: fill}} viewBox="0 0 512 512">
 		<g>
 			<path
@@ -36,3 +36,5 @@ export default ({ fill = 'gray' }: { fill: string }) => (
 		</g>
 	</svg>
 )
+
+export default SandClock

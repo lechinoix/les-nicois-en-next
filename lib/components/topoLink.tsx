@@ -10,8 +10,10 @@ const getSourceName = (source: string) => {
 	return 'Topo'
 }
 
-export default ({ topo }: PropsType) => (
-	<a href={topo.url} target="_blank">
+const TopoLink = ({ topo }: PropsType) => (
+	<a href={topo.url} target="_blank" rel="noreferrer">
 		{getSourceName(topo.source)}
 	</a>
 )
+
+export default TopoLink

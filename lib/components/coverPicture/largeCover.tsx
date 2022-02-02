@@ -1,6 +1,7 @@
 	import type { PicturePosition } from '~/config/constants';
 	import { getCoverPositionStyle } from '~/services/coverPictureService';
 	import type { Picture } from '~/config/types';
+import Image from 'next/image';
 
 	const EMPTY_HREF = '#';
 
@@ -16,7 +17,7 @@
 		picture.formats.xlarge ? picture.formats.xlarge.url : picture.url;
 
 
-export default ({ picture, position = null, title = '', href = EMPTY_HREF, onClick }: PropsType) => (
+const LargeCover = ({ picture, position = null, title = '', href = EMPTY_HREF, onClick }: PropsType) => (
 	<a
 		href={href}
 		onClick={onClick || (() => null)}
@@ -37,7 +38,7 @@ export default ({ picture, position = null, title = '', href = EMPTY_HREF, onCli
 			</strong>
 		</div>
 		{picture &&
-			<img
+			<Image
 				className={`w-full max-w-full object-cover ${getCoverPositionStyle(position)}`}
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
@@ -45,3 +46,5 @@ export default ({ picture, position = null, title = '', href = EMPTY_HREF, onCli
 		}
 	</a>
 )
+
+export default LargeCover

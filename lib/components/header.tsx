@@ -6,7 +6,7 @@ import { iconFillColor } from '~/config/constants';
 
 type PropsType = { sports: Sport[] }
 
-export default ({ sports }: PropsType) => (
+const Header = ({ sports }: PropsType) => (
 	<nav
 		className="fixed bg-white h-20 flex items-center z-10 mx-auto w-full px-10 shadow-lg justify-between"
 	>
@@ -17,8 +17,9 @@ export default ({ sports }: PropsType) => (
 			{!!sports && sports.map((sport: Sport) => (
 				<a
 					href={`/sport/${sport.slug}`}
-					className="flex text-gray-800 block px-4 py-2 text-sm justify-start items-center hover:bg-gray-100"
+					className="flex text-gray-800 px-4 py-2 text-sm justify-start items-center hover:bg-gray-100"
 					role="menuitem"
+					key={sport.id}
 				>
 					<div className="w-7 h-7 rounded-full border border-gray-300 p-1 flex justify-center mr-2">
 						<PictoSport sportSlug={sport.slug} fill={iconFillColor} />
@@ -29,3 +30,5 @@ export default ({ sports }: PropsType) => (
 		</Dropdown>
 	</nav>
 )
+
+export default Header;

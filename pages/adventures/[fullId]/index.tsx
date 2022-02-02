@@ -35,7 +35,7 @@ const AdventureFullPage = ({ adventure, allSports }: PropsType) => {
 		setComments(uniqBy([...comments, ...adventure.comments], 'id').filter(
 			(comment: Comment) => !comment.blocked
 		))
-	}, [adventure])
+	}, [adventure, comments])
 
 	const openCommentCreation = () => {
 		setIsCreatingComment(true);
