@@ -54,7 +54,8 @@ const Slider = ({ pictures = [] }: PropsType) => {
 					<Image
 						alt={picture.alternativeText}
 						src={formatAssetUrl(picture.formats.small.url)}
-						className="h-full object-contain"
+						objectPosition="contain"
+						layout="fill"
 					/>
 				</a>
 			))}

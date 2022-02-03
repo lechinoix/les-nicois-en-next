@@ -17,7 +17,8 @@ const AdventureCard = ({ adventure }: PropsType) => {
 			<div className="w-40 h-24 overflow-hidden rounded-xl flex-shrink-0">
 				{coverPicture &&
 					<Image
-						className="object-cover w-full"
+						layout="fill"
+						objectFit="cover"
 						src={coverPicture.formats.thumbnail.url}
 						alt={coverPicture.alternativeText}
 					/>

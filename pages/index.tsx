@@ -73,11 +73,15 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 							et de se lancer dans l’aventure outdoor quel quelle soit ..
 						</p>
 					</div>
-					<Image
-						src={HOMEPAGE_US_IMAGE_URL}
-						className="w-full md:w-96"
-						alt="Nous deux en haut du mont Coolidge, la Barre des Écrins est juste derrière !"
-					/>
+					<div className="w-full md:w-96">
+						<Image
+							width="100%"
+							height="100%"
+							layout="responsive"
+							src={HOMEPAGE_US_IMAGE_URL}
+							alt="Nous deux en haut du mont Coolidge, la Barre des Écrins est juste derrière !"
+						/>
+					</div>
 				</div>
 				<SeparatorTitle title="Nos dernières sorties" />
 				<div className="w-full">

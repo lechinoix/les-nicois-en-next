@@ -33,7 +33,7 @@ const NewHeader = ({ sports }: PropsType) => {
 		<nav className="absolute bg-linear-b-w py-5 z-10 mx-auto w-full px-5" style={{background: 'linear-gradient(rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))'}}>
 			<div className="flex justify-between items-center">
 				<a href={ROUTES.HOME} className="flex items-center">
-					<Image src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" className="w-14" />
+					<Image width="45rem" height="38rem" src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" />
 					<span className="text-2xl text-white font-extralight ml-4"> Les Niçois en Vadrouille </span>
 				</a>
 				<BurgerIcon isOpen={isOpen} onClick={toggleMenu} ratio={3} ref={buttonRef} />

@@ -24,7 +24,7 @@ const SearchPage = ({ adventures, allSports }: PropsType) => {
 					{adventures.map(adventure => <AdventureCard key={adventure.id} adventure={adventure} />)}
 				</section>
 				<section>
-					<Image src="/img/fake-map.png" alt="A map" />
+					<Image layout="fill" src="/img/fake-map.png" alt="A map" />
 				</section>
 			</main>
 		</SimpleLayout>

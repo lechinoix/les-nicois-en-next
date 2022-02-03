@@ -28,7 +28,7 @@ const SmallCover = ({ picture,	position = null,	href = '#',	title = '',	onClick 
 					absolute w-full h-full
 					flex justify-center
 					bg-gray-900 bg-opacity-20
-					px-5
+					px-5 z-10
 				"
 		>
 			<strong className="block text-white font-bold text-2xl text-center self-center">
@@ -37,9 +37,12 @@ const SmallCover = ({ picture,	position = null,	href = '#',	title = '',	onClick 
 		</div>
 		{picture &&
 			<Image
-				className={`object-cover ${getCoverPositionStyle(position)} h-full w-full`}
+				layout="fill"
+				objectFit="cover"
+				objectPosition={getCoverPositionStyle(position)}
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
+				className="z-0"
 			/>
 		}
 	</a>

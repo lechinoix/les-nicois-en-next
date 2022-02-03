@@ -10,14 +10,15 @@ import Image from 'next/image';
 		position: PicturePosition | null;
 		title: string;
 		href?: string;
-		onClick?: (() => void)| null
+		onClick?: (() => void)| null;
+		priority?: boolean;
 	}
 
 	const chooseFormatUrlFromPicture = (picture: Picture) =>
 		picture.formats.xlarge ? picture.formats.xlarge.url : picture.url;
 
 
-const LargeCover = ({ picture, position = null, title = '', href = EMPTY_HREF, onClick }: PropsType) => (
+const LargeCover = ({ picture, position = null, title = '', href = EMPTY_HREF, onClick, priority = false }: PropsType) => (
 	<a
 		href={href}
 		onClick={onClick || (() => null)}
@@ -39,9 +40,12 @@ const LargeCover = ({ picture, position = null, title = '', href = EMPTY_HREF, o
 		</div>
 		{picture &&
 			<Image
-				className={`w-full max-w-full object-cover ${getCoverPositionStyle(position)}`}
+				layout="fill"
+				objectPosition={getCoverPositionStyle(position)}
+				objectFit="cover"
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
+				priority={priority}
 			/>
 		}
 	</a>
