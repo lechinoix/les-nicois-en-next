@@ -32,10 +32,13 @@ const AdventureFullPage = ({ adventure, allSports }: PropsType) => {
 	const [isCreatingComment, setIsCreatingComment] = useState<boolean>(false);
 
 	useEffect(() => {
-		setComments(uniqBy([...comments, ...adventure.comments], 'id').filter(
-			(comment: Comment) => !comment.blocked
-		))
-	}, [adventure, comments])
+		setComments(
+			(comments) => uniqBy([...comments, ...adventure.comments], 'id')
+			.filter(
+				(comment: Comment) => !comment.blocked
+			)
+		)
+	}, [adventure])
 
 	const openCommentCreation = () => {
 		setIsCreatingComment(true);

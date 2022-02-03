@@ -47,14 +47,14 @@ const Slider = ({ pictures = [] }: PropsType) => {
 			{pictures.filter(picture => !!picture.url).map((picture: Picture) => (
 				<a
 					key={picture.id}
-					className="inline-block mr-2 h-full"
+					className="relative inline-block mr-2 h-full"
 					data-lg-size={`${picture.width}-${picture.height}`}
 					data-src={formatAssetUrl(picture.url)}
 				>
 					<Image
 						alt={picture.alternativeText}
 						src={formatAssetUrl(picture.formats.small.url)}
-						objectPosition="contain"
+						objectPosition="cover"
 						layout="fill"
 					/>
 				</a>
