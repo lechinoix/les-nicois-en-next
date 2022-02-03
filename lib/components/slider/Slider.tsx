@@ -51,11 +51,11 @@ const Slider = ({ pictures = [] }: PropsType) => {
 					data-lg-size={`${picture.width}-${picture.height}`}
 					data-src={formatAssetUrl(picture.url)}
 				>
-					<Image
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
 						alt={picture.alternativeText}
 						src={formatAssetUrl(picture.formats.small.url)}
-						objectPosition="cover"
-						layout="fill"
+						className="h-full object-contain"
 					/>
 				</a>
 			))}
