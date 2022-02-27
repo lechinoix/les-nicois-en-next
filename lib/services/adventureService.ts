@@ -2,6 +2,8 @@ import config from '~/config/env';
 import { AdventureStatus } from '~/config/constants';
 import type { Adventure, Picture } from '~/config/types';
 import { marked } from 'marked';
+import { ROUTES } from '~/config/routes';
+import { slugify } from '~/utils/string';
 
 const fetchAdventures = async (searchParams: URLSearchParams) => {
 	const res = await fetch(`${config.BASE_API_URL}/adventures?${searchParams.toString()}`);
@@ -66,3 +68,5 @@ export const getCoverPicture = (adventure: Adventure): Picture | null =>
 		: adventure.pictures.length > 0
 		? adventure.pictures[0]
 		: null;
+
+export const getAdventureRoute = (adventure: Adventure) => `${ROUTES.ADVENTURES.BY_ID}${adventure.id}_${slugify(adventure.title)}`

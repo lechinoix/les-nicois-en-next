@@ -5,7 +5,7 @@ import SmallCover from '../coverPicture/smallCover';
 import type { Adventure } from '~/config/types';
 import { ROUTES } from '~/config/routes';
 import { slugify } from '~/utils/string';
-import { getCoverPicture } from '~/services/adventureService';
+import { getAdventureRoute, getCoverPicture } from '~/services/adventureService';
 
 const mapTypeToComponent = {
 	[CoverTypes.LARGE]: LargeCover,
@@ -25,7 +25,7 @@ const AdventureCover = ({ adventure, coverType = CoverTypes.LARGE, onClick = nul
 	const title = adventure.title;
 	const href = onClick !== null
 			? ''
-			: `${ROUTES.ADVENTURES.BY_ID}${adventure.id}_${slugify(adventure.title)}`
+			: getAdventureRoute(adventure)
 
 	const CoverTypeComponent = mapTypeToComponent[coverType];
 
