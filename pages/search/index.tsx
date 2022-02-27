@@ -1,5 +1,6 @@
 import { getAdventureRoute, getAllAdventures } from '~/services/adventureService';
 import AdventureCard from '~/components/adventures/adventureCard';
+import Map from '~/components/map'
 import type { Adventure, Sport } from '~/config/types';
 import { getAllSports } from '~/services/sportService';
 import SimpleLayout from '~/components/layouts/SimpleLayout';
@@ -22,8 +23,8 @@ const SearchPage = ({ adventures, allSports }: PropsType) => {
 				<section className="h-full overflow-scroll pl-3 cursor-pointer">
 					{adventures.map(adventure => <a href={getAdventureRoute(adventure)} key={adventure.id}><AdventureCard adventure={adventure} /></a>)}
 				</section>
-				<section>
-					<img src="/img/fake-map.png" alt="A map" />
+				<section className="w-full h-full">
+					<Map adventures={adventures} />
 				</section>
 			</main>
 		</SimpleLayout>
