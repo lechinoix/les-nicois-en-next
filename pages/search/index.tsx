@@ -3,7 +3,6 @@ import AdventureCard from '~/components/adventures/adventureCard';
 import type { Adventure, Sport } from '~/config/types';
 import { getAllSports } from '~/services/sportService';
 import SimpleLayout from '~/components/layouts/SimpleLayout';
-import Image from 'next/image';
 
 type PropsType = {
 	adventures: Adventure[],
@@ -24,7 +23,7 @@ const SearchPage = ({ adventures, allSports }: PropsType) => {
 					{adventures.map(adventure => <AdventureCard key={adventure.id} adventure={adventure} />)}
 				</section>
 				<section>
-					<Image layout="fill" src="/img/fake-map.png" alt="A map" />
+					<img src="/img/fake-map.png" alt="A map" />
 				</section>
 			</main>
 		</SimpleLayout>

@@ -5,7 +5,6 @@ import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
 
 type PropsType = {
 	pictures: Picture[],

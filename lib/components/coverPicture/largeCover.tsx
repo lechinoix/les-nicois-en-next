@@ -1,7 +1,6 @@
 import type { PicturePosition } from '~/config/constants';
 import { getCoverPositionStyle } from '~/services/coverPictureService';
 import type { Picture } from '~/config/types';
-import Image from 'next/image';
 
 const EMPTY_HREF = '#';
 
@@ -39,14 +38,11 @@ const LargeCover = ({ picture, position = null, title = '', href = EMPTY_HREF, o
 			</strong>
 		</div>
 		{picture &&
-			<Image
-				layout="fill"
-				objectPosition={getCoverPositionStyle(position)}
-				objectFit="cover"
+			<img
+				className="w-full max-w-full object-cover z-0"
+				style={{ objectPosition: getCoverPositionStyle(position) }}
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
-				priority={priority}
-				className="z-0"
 			/>
 		}
 	</a>

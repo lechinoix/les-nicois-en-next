@@ -1,7 +1,6 @@
 import type { PicturePosition } from '~/config/constants';
 import { getCoverPositionStyle } from '~/services/coverPictureService';
 import type { Picture } from '~/config/types';
-import Image from 'next/image';
 
 type PropsType = {
 	picture: Picture | null;
@@ -12,7 +11,7 @@ const chooseFormatUrlFromPicture = (picture: Picture) =>
 	picture.formats.xlarge ? picture.formats.xlarge.url : picture.url;
 
 const HomeCover = ({ picture, position = null }: PropsType) => (
-	<div className="relative w-full flex bg-gray-400 min-h-80 h-1/3" style={{maxHeight: '35rem', minHeight: '20rem'}}>
+	<div className="relative w-full flex bg-gray-400 min-h-80 h-1/3" style={{maxHeight: '35rem'}}>
 		<div className="absolute w-full h-full flex justify-end pb-8 pr-10 bg-gray-900 bg-opacity-10 z-10">
 			<strong className="block text-white text-3xl text-right font-light self-end">
 				Bienvenue sur le blog d&apos;aventures
@@ -21,14 +20,11 @@ const HomeCover = ({ picture, position = null }: PropsType) => (
 			</strong>
 		</div>
 		{picture && (
-			<Image
-				layout="fill"
-				objectPosition={getCoverPositionStyle(position)}
-				objectFit="cover"
+			<img
+				className="w-full max-w-full object-cover"
+				style={{ objectPosition: getCoverPositionStyle(position) }}
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
-				className="z-0"
-				priority
 			/>
 		)}
 	</div>

@@ -4,7 +4,6 @@ import BurgerIcon from './burgerIcon';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import './NewHeader.module.css';
-import Image from 'next/image';
 
 type PropsType = { sports: Sport[] };
 
@@ -33,7 +32,7 @@ const NewHeader = ({ sports }: PropsType) => {
 		<nav className="absolute bg-linear-b-w py-5 z-20 mx-auto w-full px-5" style={{background: 'linear-gradient(rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))'}}>
 			<div className="flex justify-between items-center">
 				<a href={ROUTES.HOME} className="flex items-center">
-					<Image width="45rem" height="38rem" src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" />
+					<img src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" className="w-14" />
 					<span className="text-2xl text-white font-extralight ml-4"> Les Niçois en Vadrouille </span>
 				</a>
 				<BurgerIcon isOpen={isOpen} onClick={toggleMenu} ratio={3} ref={buttonRef} />

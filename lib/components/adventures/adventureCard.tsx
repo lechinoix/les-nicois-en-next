@@ -1,7 +1,6 @@
 import { getCoverPicture } from '~/services/adventureService';
 import type { Adventure, Picture } from '~/config/types';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 type PropsType = { adventure: Adventure }
 
@@ -16,9 +15,8 @@ const AdventureCard = ({ adventure }: PropsType) => {
 		<div className="flex my-5">
 			<div className="w-40 h-24 overflow-hidden rounded-xl flex-shrink-0">
 				{coverPicture &&
-					<Image
-						layout="fill"
-						objectFit="cover"
+					<img
+						className="object-cover"
 						src={coverPicture.formats.thumbnail.url}
 						alt={coverPicture.alternativeText}
 					/>

@@ -1,7 +1,6 @@
 import type { PicturePosition } from '~/config/constants';
 import { getCoverPositionStyle } from '~/services/coverPictureService';
 import type { Picture } from '~/config/types';
-import Image from 'next/image';
 
 type PropsType = {
 	picture: Picture | null;
@@ -36,13 +35,11 @@ const SmallCover = ({ picture,	position = null,	href = '#',	title = '',	onClick 
 			</strong>
 		</div>
 		{picture &&
-			<Image
-				layout="fill"
-				objectFit="cover"
-				objectPosition={getCoverPositionStyle(position)}
+			<img
 				src={chooseFormatUrlFromPicture(picture)}
 				alt={picture.alternativeText}
-				className="z-0"
+				className="z-0 object-cover"
+				style={{ objectPosition: getCoverPositionStyle(position) }}
 			/>
 		}
 	</a>
