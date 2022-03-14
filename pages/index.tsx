@@ -18,13 +18,17 @@ import { getAllSports } from '~/services/sportService';
 import { fetchPictureById } from '~/services/uploadPluginService';
 import Head from 'next/head'
 import SimpleLayout from '~/components/layouts/SimpleLayout';
+import useSWR, { SWRConfig } from 'swr';
+import Loader from '~/components/loader';
 
-export const getStaticProps = async (): Promise<{ props: PropsType }> => {
+export const getStaticProps = async (): Promise<{ props: ServerPropsType }> => {
 	const latestAdventures = await getLatestAdventures();
-	const coverPicture = await fetchPictureById(fetch, env.COVER_PICTURE_ID);
+	const coverPicture = await fetchPictureById(env.COVER_PICTURE_ID);
 	const sports = await getAllSports();
 
-	return { props: { latestAdventures, coverPicture, sports } }
+	const fallback = { latestAdventures, coverPicture, sports }
+
+	return { props: { fallback } }
 };
 
 type PropsType = {
@@ -32,6 +36,8 @@ type PropsType = {
 	coverPicture: Picture;
 	sports: Sport[];
 }
+
+type ServerPropsType = { fallback: PropsType }
 
 const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	const adventureItems = latestAdventures.map((adventure) => ({
@@ -93,4 +99,22 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	)
 }
 
-export default HomePage;
+const LazyHomepage = () => {
+	const { data: latestAdventures } = useSWR('getLatestAdventures', getLatestAdventures);
+	const { data: coverPicture } = useSWR('fetchPictureById', () => fetchPictureById(env.COVER_PICTURE_ID));
+	const { data: sports } = useSWR('getAllSports', getAllSports);
+
+	if (!latestAdventures || !coverPicture || !sports) return <div className="absolute w-full h-full flex item-center justify-center"><Loader /></div>
+
+	return <HomePage latestAdventures={latestAdventures} coverPicture={coverPicture} sports={sports} />
+}
+
+const WrappedHomePage = (serverProps: ServerPropsType) => {
+	return (
+		<SWRConfig value={serverProps}>
+			<LazyHomepage />
+		</SWRConfig>
+	)
+}
+
+export default WrappedHomePage;

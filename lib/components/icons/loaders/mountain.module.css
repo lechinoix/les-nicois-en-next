@@ -1,7 +1,7 @@
-#eiaMlxh9Y1f6_to {
-  animation: eiaMlxh9Y1f6_to__to 3000ms linear infinite normal forwards;
+.firstEl {
+  animation: animation_1 3000ms linear infinite normal forwards;
 }
-@keyframes eiaMlxh9Y1f6_to__to {
+@keyframes animation_1 {
   0% {
     transform: translate(125px, 48.026501px);
   }
@@ -15,10 +15,10 @@
     transform: translate(125px, 48.026501px);
   }
 }
-#eiaMlxh9Y1f6 {
-  animation: eiaMlxh9Y1f6_c_o 3000ms linear infinite normal forwards;
+.secondEl {
+  animation: animation_2 3000ms linear infinite normal forwards;
 }
-@keyframes eiaMlxh9Y1f6_c_o {
+@keyframes animation_2 {
   0% {
     opacity: 0;
   }
@@ -32,10 +32,10 @@
     opacity: 0;
   }
 }
-#eiaMlxh9Y1f9_to {
-  animation: eiaMlxh9Y1f9_to__to 3000ms linear infinite normal forwards;
+.thirdEl {
+  animation: animation_3 3000ms linear infinite normal forwards;
 }
-@keyframes eiaMlxh9Y1f9_to__to {
+@keyframes animation_3 {
   0% {
     offset-distance: 0%;
   }
@@ -49,10 +49,10 @@
     offset-distance: 100%;
   }
 }
-#eiaMlxh9Y1f9 {
-  animation: eiaMlxh9Y1f9_c_o 3000ms linear infinite normal forwards;
+.fourthEl {
+  animation: animation_4 3000ms linear infinite normal forwards;
 }
-@keyframes eiaMlxh9Y1f9_c_o {
+@keyframes animation_4 {
   0% {
     opacity: 1;
   }
