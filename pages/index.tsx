@@ -18,17 +18,14 @@ import { getAllSports } from '~/services/sportService';
 import { fetchPictureById } from '~/services/uploadPluginService';
 import Head from 'next/head'
 import SimpleLayout from '~/components/layouts/SimpleLayout';
-import useSWR, { SWRConfig } from 'swr';
-import Loader from '~/components/loader';
+import { GetStaticProps } from 'next/types';
 
-export const getStaticProps = async (): Promise<{ props: ServerPropsType }> => {
+export const getStaticProps: GetStaticProps<PropsType> = async () => {
 	const latestAdventures = await getLatestAdventures();
 	const coverPicture = await fetchPictureById(env.COVER_PICTURE_ID);
 	const sports = await getAllSports();
 
-	const fallback = { latestAdventures, coverPicture, sports }
-
-	return { props: { fallback } }
+	return { props: { latestAdventures, coverPicture, sports }, revalidate: 60 }
 };
 
 type PropsType = {
@@ -36,8 +33,6 @@ type PropsType = {
 	coverPicture: Picture;
 	sports: Sport[];
 }
-
-type ServerPropsType = { fallback: PropsType }
 
 const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	const adventureItems = latestAdventures.map((adventure) => ({
@@ -99,22 +94,4 @@ const HomePage = ({ latestAdventures, coverPicture, sports }: PropsType) => {
 	)
 }
 
-const LazyHomepage = () => {
-	const { data: latestAdventures } = useSWR('getLatestAdventures', getLatestAdventures);
-	const { data: coverPicture } = useSWR('fetchPictureById', () => fetchPictureById(env.COVER_PICTURE_ID));
-	const { data: sports } = useSWR('getAllSports', getAllSports);
-
-	if (!latestAdventures || !coverPicture || !sports) return <div className="absolute w-full h-full flex item-center justify-center"><Loader /></div>
-
-	return <HomePage latestAdventures={latestAdventures} coverPicture={coverPicture} sports={sports} />
-}
-
-const WrappedHomePage = (serverProps: ServerPropsType) => {
-	return (
-		<SWRConfig value={serverProps}>
-			<LazyHomepage />
-		</SWRConfig>
-	)
-}
-
-export default WrappedHomePage;
+export default HomePage;
